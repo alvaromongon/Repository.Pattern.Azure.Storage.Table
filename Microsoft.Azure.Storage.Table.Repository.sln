@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2000
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C804529E-A674-46A6-BE65-71D5D155CC1B}"
+	ProjectSection(SolutionItems) = preProject
+		nuget.config = nuget.config
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{AAC8DCA4-9937-4E4C-B42D-438C3D40C726}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{BF0AF0FD-26B9-4438-98A8-998F3021B94F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository.Pattern.Abstractions", "src\Repository.Pattern.Abstractions\Repository.Pattern.Abstractions.csproj", "{2942F5CC-00A9-4D4B-AC59-F4B495F63212}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Azure.Storage.Table.Repository", "src\Microsoft.Azure.Storage.Table.Repository\Microsoft.Azure.Storage.Table.Repository.csproj", "{F6920CCE-BEA4-4D8D-BE19-C1D7291F52C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Azure.Storage.Table.Repository.Tests", "Microsoft.Azure.Storage.Table.Repository.Tests\Microsoft.Azure.Storage.Table.Repository.Tests.csproj", "{B19E881B-2CC5-43D2-AF5E-F6145FA5D800}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2942F5CC-00A9-4D4B-AC59-F4B495F63212}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2942F5CC-00A9-4D4B-AC59-F4B495F63212}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2942F5CC-00A9-4D4B-AC59-F4B495F63212}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2942F5CC-00A9-4D4B-AC59-F4B495F63212}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6920CCE-BEA4-4D8D-BE19-C1D7291F52C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6920CCE-BEA4-4D8D-BE19-C1D7291F52C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6920CCE-BEA4-4D8D-BE19-C1D7291F52C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6920CCE-BEA4-4D8D-BE19-C1D7291F52C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B19E881B-2CC5-43D2-AF5E-F6145FA5D800}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B19E881B-2CC5-43D2-AF5E-F6145FA5D800}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B19E881B-2CC5-43D2-AF5E-F6145FA5D800}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B19E881B-2CC5-43D2-AF5E-F6145FA5D800}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2942F5CC-00A9-4D4B-AC59-F4B495F63212} = {AAC8DCA4-9937-4E4C-B42D-438C3D40C726}
+		{F6920CCE-BEA4-4D8D-BE19-C1D7291F52C8} = {AAC8DCA4-9937-4E4C-B42D-438C3D40C726}
+		{B19E881B-2CC5-43D2-AF5E-F6145FA5D800} = {BF0AF0FD-26B9-4438-98A8-998F3021B94F}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C4376482-E91C-402C-B035-0403CE7576B1}
+	EndGlobalSection
+EndGlobal
