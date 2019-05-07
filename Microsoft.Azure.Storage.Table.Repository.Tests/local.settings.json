@@ -1,0 +1,4 @@
+{
+  "AzureStorageConnectionString": "UseDevelopmentStorage=true",
+  "TableTestName" : "tabletest"
+}

@@ -1,7 +1,6 @@
 ﻿using Microsoft.Azure.Storage.Table.Repository.Tests.DomainModel;
 using Microsoft.WindowsAzure.Storage.Table;
 using Repository.Pattern.Abstractions;
-using System;
 
 namespace Microsoft.Azure.Storage.Table.Repository.Tests.Repository
 {
@@ -14,12 +13,12 @@ namespace Microsoft.Azure.Storage.Table.Repository.Tests.Repository
 
         protected override string GetPartitionKey(DomainModelClass entity)
         {
-            throw new NotImplementedException();
+            return $"{entity.AString}";
         }
 
         protected override string GetRowKey(DomainModelClass entity)
         {
-            throw new NotImplementedException();
+            return $"{ entity.AnotherString}_{entity.AGuid.ToString()}";
         }
     }
 }

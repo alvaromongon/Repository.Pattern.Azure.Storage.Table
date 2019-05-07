@@ -1,7 +1,6 @@
 ﻿using Microsoft.Azure.Storage.Table.Repository.Tests.DomainModel;
 using Microsoft.Extensions.Configuration;
 using Repository.Pattern.Abstractions;
-using System;
 
 namespace Microsoft.Azure.Storage.Table.Repository.Tests.Configuration
 {
@@ -14,6 +13,6 @@ namespace Microsoft.Azure.Storage.Table.Repository.Tests.Configuration
             _configurationRoot = configurationRoot;
         }
 
-        public string TableName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string TableName => _configurationRoot.GetValue<string>("TableTestName");
     }
 }

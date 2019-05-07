@@ -2,6 +2,6 @@
 {
     public interface IRepositoryConfiguration<TDomainModel> where TDomainModel : class, new()
     {
-        string TableName { get; set; }
+        string TableName { get; }
     }  
 }

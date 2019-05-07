@@ -14,7 +14,7 @@ namespace Repository.Pattern.Abstractions
 
         Task<TDomainModel> AddAsync(TDomainModel domainModel);
 
-        Task AddBatchAsync(IEnumerable<TDomainModel> domainModelEnumerable, BatchOperationOptions options);
+        Task AddBatchAsync(IEnumerable<TDomainModel> domainModelEnumerable, BatchOperationOptions options = null);
 
         Task<TDomainModel> AddOrUpdateAsync(TDomainModel domainModel);
 

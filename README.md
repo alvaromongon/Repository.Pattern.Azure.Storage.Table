@@ -19,5 +19,15 @@ Just get it and build it. I was using VS 2017 Enterprise.
 The idea is to have a separate IRepository for each domain object. 
 The domain object will know nothing about the storage layer and the effort to build the storage layer is minimum.
 
+The tradeof of being so easy to use is the speed and the supported types, that we will try to improve with the time.
+For the first version only the Azure Storage Table types are supported:
+[https://docs.microsoft.com/en-us/rest/api/storageservices/understanding-the-table-service-data-model](Understanding the Table Service Data Model)
+
+
 # Build and Test
-Take a look at the tests to understand how to use it.
+Building is easy since there it not special dependecies, 
+but in order to run the tests you have to manually launch the Microsoft Azure Storage Emulator.
+
+Once you have the storage emulator up and running, just run the tests.
+With the test you have an idea of how to use it and what are the limitations.
+

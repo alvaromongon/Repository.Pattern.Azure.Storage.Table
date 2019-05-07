@@ -33,7 +33,10 @@ namespace Microsoft.Azure.Storage.Table.Repository.TableEntities
                 properties.Add(member.Name, BuildEntityProperty(member, objectAccessor[member.Name]));
             }
 
-            return new DynamicTableEntity(parititonKey, rowKey, null, properties);
+            var tableEntity = new DynamicTableEntity(parititonKey, rowKey, null, properties);
+            tableEntity.Timestamp = DateTimeOffset.UtcNow;
+
+            return tableEntity;
         }
 
         private static dynamic GetEntityPropertyValue(EntityProperty entityProperty)
@@ -70,10 +73,6 @@ namespace Microsoft.Azure.Storage.Table.Repository.TableEntities
             {
                 result = new EntityProperty(value as string);
             }
-            else if (memberType.Equals(typeof(byte[])))
-            {
-                result = new EntityProperty(value as byte[]);
-            }
             else if (memberType.Equals(typeof(bool)) || memberType.Equals(typeof(bool?)))
             {
                 result = new EntityProperty(value as bool?);
@@ -98,9 +97,21 @@ namespace Microsoft.Azure.Storage.Table.Repository.TableEntities
             {
                 result = new EntityProperty(value as long?);
             }
+            else if (memberType.Equals(typeof(byte[])))
+            {                
+                result = new EntityProperty(value as byte[]);
+            }
+            // else if (memberType.Equals(typeof(DateTime)) || memberType.Equals(typeof(DateTime?))
+            // else if (memberType.Equals(typeof(decimal)) || memberType.Equals(typeof(decimal?))
+            // else if (memberType.Equals(typeof(TimeSpan)) || memberType.Equals(typeof(TimeSpan?))
+            //else if (memberType.IsClass && !memberType.IsValueType && !memberType.IsPrimitive && memberType.IsSerializable)
+            //{
+            //    result = new EntityProperty(value.Serialize());
+            //}
             else
             {
-                result = new EntityProperty(value.ToString());
+                //result = new EntityProperty(value as string);
+                throw new NotSupportedException(memberType.Name);
             }
 
             return result;

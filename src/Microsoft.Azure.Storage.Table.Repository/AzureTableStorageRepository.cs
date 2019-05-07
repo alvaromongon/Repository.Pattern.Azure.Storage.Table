@@ -120,7 +120,7 @@ namespace Microsoft.Azure.Storage.Table.Repository
             }
         }
 
-        public async Task AddBatchAsync(IEnumerable<TDomainModel> domainModelEnumerable, BatchOperationOptions options)
+        public async Task AddBatchAsync(IEnumerable<TDomainModel> domainModelEnumerable, BatchOperationOptions options = null)
         {
             GuardDomainModels(domainModelEnumerable);
 
