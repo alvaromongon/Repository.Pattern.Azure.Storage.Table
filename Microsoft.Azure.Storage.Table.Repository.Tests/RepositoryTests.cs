@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using Microsoft.Azure.Storage.Table.Repository.Exceptions;
 using Microsoft.Azure.Storage.Table.Repository.Tests.Configuration;
 using Microsoft.Azure.Storage.Table.Repository.Tests.DomainModel;
 using Microsoft.Azure.Storage.Table.Repository.Tests.Repository;
@@ -17,7 +18,7 @@ namespace Microsoft.Azure.Storage.Table.Repository.Tests
     public class RepositoryTests
     {
         private const string _settingsFile = "local.settings.json";
-        private static readonly string _partitionKeyString = Guid.NewGuid().ToString();
+        private static string _partitionKeyString;
 
         private static IRepository<DomainModelClass> _sut;
 
@@ -34,12 +35,14 @@ namespace Microsoft.Azure.Storage.Table.Repository.Tests
 
             IRepositoryConfiguration <DomainModelClass> configuration = new DomainModelClassRepositoryConfiguration(configurationRoot);
             _sut = new DomainModelClassRepository(cloudTableClient, configuration);
+
+            _partitionKeyString = Guid.NewGuid().ToString();
         }
 
         [ClassCleanup]
-        public static void ClassCleanUp()
+        public static async Task ClassCleanUp()
         {
-            _sut.DeleteAllAsync(_partitionKeyString);
+            await _sut.DeleteAllAsync(_partitionKeyString);
         }
 
         [TestMethod]
@@ -76,7 +79,7 @@ namespace Microsoft.Azure.Storage.Table.Repository.Tests
         }
 
         [TestMethod]
-        public async Task WhenAdd_AndGet_ThenIsReturned()
+        public async Task WhenAdd_AndGetWithPartitionAndRowKey_ThenIsReturned()
         {
             // Arrange
             var domainModel1 = new DomainModelClass(_partitionKeyString);
@@ -112,7 +115,7 @@ namespace Microsoft.Azure.Storage.Table.Repository.Tests
         }
 
         [TestMethod]
-        public async Task WhenAdd_AndBatchGetAll_ThenAreReturned()
+        public async Task WhenAddBatch_AndGetAll_ThenAreReturned()
         {
             // Arrange
             var domainModel1 = new DomainModelClass(_partitionKeyString);
@@ -137,7 +140,7 @@ namespace Microsoft.Azure.Storage.Table.Repository.Tests
         }
 
         [TestMethod]
-        public async Task WhenAdd_AndBatchGetAllWithPartitionKey_ThenAreReturned()
+        public async Task WhenAddBatch_AndGetAllWithPartitionKey_ThenAreReturned()
         {
             // Arrange
             var domainModel1 = new DomainModelClass(_partitionKeyString);
@@ -159,6 +162,148 @@ namespace Microsoft.Azure.Storage.Table.Repository.Tests
             getAllResult.Should().HaveCountGreaterOrEqualTo(2);
             getAllResult.First(i => i.AnotherString == domainModel1.AnotherString).Should().BeEquivalentTo(domainModel1);
             getAllResult.First(i => i.AnotherString == domainModel2.AnotherString).Should().BeEquivalentTo(domainModel2);
-        }        
+        }
+
+        [TestMethod]
+        public async Task WhenAddOrUpdate_AndNotExist_AndGet_ThenIsReturned()
+        {
+            // Arrange
+            var domainModel1 = new DomainModelClass(_partitionKeyString);
+            var partitionKey = $"{domainModel1.AString}";
+            var rowKey = $"{ domainModel1.AnotherString}_{domainModel1.AGuid.ToString()}";
+
+            //Act
+            var addResult = await _sut.AddOrUpdateAsync(domainModel1);
+            var result = await _sut.GetAsync(partitionKey, rowKey);
+
+            // Assert
+            result.Should().NotBeNull();
+            result.Should().BeEquivalentTo(domainModel1);
+        }
+
+        [TestMethod]
+        public async Task WhenAddOrUpdate_AndExist_AndGet_ThenIsReturnedWithTheUpdate()
+        {
+            // Arrange
+            var domainModel1 = new DomainModelClass(_partitionKeyString);
+            var partitionKey = $"{domainModel1.AString}";
+            var rowKey = $"{ domainModel1.AnotherString}_{domainModel1.AGuid.ToString()}";
+
+            //Act
+            var addResult1 = await _sut.AddOrUpdateAsync(domainModel1);
+            domainModel1.ALong = 45234563456534;
+            domainModel1.ADateTimeOffset = DateTimeOffset.UtcNow;
+            var addResult2 = await _sut.AddOrUpdateAsync(domainModel1);
+
+            var result = await _sut.GetAsync(partitionKey, rowKey);
+
+            // Assert
+            result.Should().NotBeNull();
+            result.Should().BeEquivalentTo(domainModel1);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(DoesNotExistException))]
+        public async Task WhenUpdate_AndDoesNotExist_ThenDoesNotExistException()
+        {
+            // Arrange
+            var domainModel1 = new DomainModelClass(_partitionKeyString);
+            var partitionKey = $"{domainModel1.AString}";
+            var rowKey = $"{ domainModel1.AnotherString}_{domainModel1.AGuid.ToString()}";
+
+            //Act
+            await _sut.UpdateAsync(domainModel1);
+
+            // Assert
+        }
+
+        [TestMethod]
+        public async Task WhenUpdate_AndGet_ThenIsReturnedWithTheUpdate()
+        {
+            // Arrange
+            var domainModel1 = new DomainModelClass(_partitionKeyString);
+            var partitionKey = $"{domainModel1.AString}";
+            var rowKey = $"{ domainModel1.AnotherString}_{domainModel1.AGuid.ToString()}";
+
+            //Act
+            var addResult1 = await _sut.AddAsync(domainModel1);
+            domainModel1.ALong = 34523452;
+            domainModel1.ADateTimeOffset = DateTimeOffset.UtcNow;
+            var addResult2 = await _sut.UpdateAsync(domainModel1);
+
+            var result = await _sut.GetAsync(partitionKey, rowKey);
+
+            // Assert
+            result.Should().NotBeNull();
+            result.Should().BeEquivalentTo(domainModel1);
+        }
+
+        [TestMethod]
+        public async Task WhenAddBatch_AndDeleteAll_ThenAreDeleted()
+        {
+            // Arrange
+            var suffix = "_TODELETEALL";
+            var domainModel1 = new DomainModelClass($"{_partitionKeyString}{suffix}");
+            var domainModel2 = new DomainModelClass($"{_partitionKeyString}{suffix}");
+            var domainModel3 = new DomainModelClass($"{_partitionKeyString}{suffix}");
+
+            var list = new List<DomainModelClass>()
+            {
+                domainModel1,
+                domainModel2,
+                domainModel3
+            };
+            var partitionKey = $"{domainModel1.AString}";
+
+            //Act
+            await _sut.AddBatchAsync(list);
+            var getAllResult = await _sut.GetAllAsync(partitionKey);
+            await _sut.DeleteAllAsync(partitionKey);
+            var getAllResultAfterDelete = await _sut.GetAllAsync(partitionKey);
+
+            // Assert
+            getAllResult.Should().HaveCountGreaterOrEqualTo(3);
+            getAllResultAfterDelete.Should().BeEmpty();
+        }
+
+        [TestMethod]
+        public async Task WhenAddBatch_AndDeleteByEntity_ThenIsDeleted()
+        {
+            // Arrange
+            var suffix = "_TODELETEBYENTITY";
+            var domainModel1 = new DomainModelClass($"{_partitionKeyString}{suffix}");
+            var partitionKey = $"{domainModel1.AString}";
+            var rowKey = $"{ domainModel1.AnotherString}_{domainModel1.AGuid.ToString()}";
+
+            //Act
+            await _sut.AddAsync(domainModel1);
+            var getResult = await _sut.GetAsync(partitionKey, rowKey);
+            await _sut.DeleteAsync(domainModel1);
+            var getAfterDelete = await _sut.GetAllAsync(partitionKey);
+
+            // Assert
+            getResult.Should().NotBeNull();
+            getAfterDelete.Should().BeEmpty();
+        }
+
+        [TestMethod]
+        public async Task WhenAddBatch_AndDeleteByPartitionAndRowKey_ThenIsDeleted()
+        {
+            // Arrange
+            var suffix = "_TODELETEBYPARTITION&ROWKEY";
+            var domainModel1 = new DomainModelClass($"{_partitionKeyString}{suffix}");
+            var partitionKey = $"{domainModel1.AString}";
+            var rowKey = $"{ domainModel1.AnotherString}_{domainModel1.AGuid.ToString()}";
+
+            //Act
+            await _sut.AddAsync(domainModel1);
+            var getResult = await _sut.GetAsync(partitionKey, rowKey);
+            await _sut.DeleteAsync(partitionKey, rowKey);
+            var getAfterDelete = await _sut.GetAllAsync(partitionKey);
+
+            // Assert
+            getResult.Should().NotBeNull();
+            getAfterDelete.Should().BeEmpty();
+        }
     }
 }

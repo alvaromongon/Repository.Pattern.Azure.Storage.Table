@@ -33,7 +33,7 @@ namespace Microsoft.Azure.Storage.Table.Repository.TableEntities
                 properties.Add(member.Name, BuildEntityProperty(member, objectAccessor[member.Name]));
             }
 
-            var tableEntity = new DynamicTableEntity(parititonKey, rowKey, null, properties);
+            var tableEntity = new DynamicTableEntity(parititonKey, rowKey, "*", properties);
             tableEntity.Timestamp = DateTimeOffset.UtcNow;
 
             return tableEntity;

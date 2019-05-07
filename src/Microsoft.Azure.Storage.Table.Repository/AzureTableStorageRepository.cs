@@ -229,6 +229,8 @@ namespace Microsoft.Azure.Storage.Table.Repository
 
                 token = queryResult.ContinuationToken;
             } while (token != null);
+
+            await Table.ExecuteBatchAsync(tableBatchOperation);
         }
 
         public async Task<TDomainModel> DeleteAsync(TDomainModel domainModel)
@@ -306,7 +308,8 @@ namespace Microsoft.Azure.Storage.Table.Repository
             }
             else if (type == TableOperationType.Merge || type == TableOperationType.Replace || type == TableOperationType.Delete || type == TableOperationType.Retrieve)
             {
-                if (statusCode == HttpStatusCode.Conflict && errorCode == StorageErrorCodeStrings.ResourceNotFound)
+                if ((statusCode == HttpStatusCode.Conflict || statusCode == HttpStatusCode.NotFound)
+                    && errorCode == StorageErrorCodeStrings.ResourceNotFound)
                 {
                     return new DoesNotExistException("The given entity does not exists in the table", exception);
                 }
