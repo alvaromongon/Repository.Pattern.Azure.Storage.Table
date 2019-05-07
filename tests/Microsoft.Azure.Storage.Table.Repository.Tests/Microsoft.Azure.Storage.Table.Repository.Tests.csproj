@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Microsoft.Azure.Storage.Table.Repository\Microsoft.Azure.Storage.Table.Repository.csproj" />
+    <ProjectReference Include="..\..\src\Microsoft.Azure.Storage.Table.Repository\Microsoft.Azure.Storage.Table.Repository.csproj" />
   </ItemGroup>
 
   <ItemGroup>
