@@ -5,7 +5,7 @@
     <Authors>Alvaro Montero Gonzalez</Authors>
     <RepositoryUrl>https://github.com/alvaromongon/Microsoft.Azure.Storage.Table.Repository/</RepositoryUrl>
     <PackageProjectUrl>https://github.com/alvaromongon/Microsoft.Azure.Storage.Table.Repository/</PackageProjectUrl>
-    <PackageLicenseExpression>https://github.com/alvaromongon/Microsoft.Azure.Storage.Table.Repository/blob/master/LICENSE.md</PackageLicenseExpression>
+    <PackageLicenseExpression></PackageLicenseExpression>
     <Description>Repository pattern implementation for microsoft azure storage table. It is probably not the fastest one but maybe one of the most simple. The tradeof is the use of dynamic in order to map from model objects. to table entites.</Description>
     <PackageTags>netstandard tablestorage repository-pattern azure-table-storage azure-storage</PackageTags>
     <Version>0.1.0</Version>
