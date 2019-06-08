@@ -1,3 +1,5 @@
+[![ease_maker MyGet Build Status](https://www.myget.org/BuildSource/Badge/ease_maker?identifier=006b227d-9186-4a06-9023-ebd3070fd3ad)](https://www.myget.org/)
+
 # Introduction 
 Repository pattern implementation for microsoft azure storage table.
 It is probably not the fastest one but maybe one of the most simple.
