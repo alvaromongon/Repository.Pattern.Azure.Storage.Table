@@ -8,7 +8,7 @@
     <owners>Alvaro Montero Gonzalez</owners>
     <licenseUrl>https://github.com/alvaromongon/Microsoft.Azure.Storage.Table.Repository/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/alvaromongon/Microsoft.Azure.Storage.Table.Repository</projectUrl>
-    <iconUrl></iconUrl>
+    <iconUrl>https://www.nuget.org/Content/gallery/img/default-package-icon.svg</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Repository pattern implementation for microsoft azure storage table. It is probably not the fastest one but maybe one of the most simple. The tradeof is the use of dynamic in order to map from model objects. to table entites.</description>
     <releaseNotes>First Release.</releaseNotes>
@@ -20,10 +20,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="bin\Release\Microsoft.Azure.Storage.Table.Repository.dll" target="lib\netstandard2.0\Microsoft.Azure.Storage.Table.Repository.dll" />
-    <file src="bin\Release\Microsoft.Azure.Storage.Table.Repository.xml" target="lib\netstandard2.0\Microsoft.Azure.Storage.Table.Repository.xml" />
-    
-    <file src="bin\Release\Repository.Pattern.Abstractions.dll" target="lib\netstandard2.0\Repository.Pattern.Abstractions.dll" />    
-    <file src="bin\Release\Repository.Pattern.Abstractions.xml" target="lib\netstandard2.0\Repository.Pattern.Abstractions.xml" />
+    <file src="src\Microsoft.Azure.Storage.Table.Repository\bin\Release\netstandard2.0\Microsoft.Azure.Storage.Table.Repository.dll" target="lib\netstandard2.0\Microsoft.Azure.Storage.Table.Repository.dll" />    
+    <file src="src\Microsoft.Azure.Storage.Table.Repository\bin\Release\netstandard2.0\Repository.Pattern.Abstractions.dll" target="lib\netstandard2.0\Repository.Pattern.Abstractions.dll" />    
   </files>
 </package>
