@@ -16,7 +16,7 @@
     <tags>netstandard tablestorage repository-pattern azure-table-storage azure-storage</tags>
     <dependencies>
       <dependency id="FastMember" version="1.4.1" />
-      <dependency id="Windows.Azure.Storage" version="9.3.3" />
+      <dependency id="WindowsAzure.Storage" version="9.3.3" />
     </dependencies>
   </metadata>
   <files>
