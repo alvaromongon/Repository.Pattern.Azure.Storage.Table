@@ -24,9 +24,10 @@ steps:
 
 # do this after other tasks such as building
 - task: DotNetCoreCLI@2
+  displayName: UnitTests
   inputs:
     command: test
-    projects: '**/tests/*.csproj'
+    projects: '**/tests/**/*.csproj'
     arguments: '--configuration $(buildConfiguration)'
 
 
