@@ -25,7 +25,7 @@ steps:
 - script: dotnet publish --output $(Build.ArtifactStagingDirectory)
 
 - task: DotNetCoreCLI@2
-  displayName: IntegrationTests
+  displayName: UnitTests
   inputs:
     command: test
     projects: '**/tests/**/*UnitTests.csproj'
