@@ -22,23 +22,16 @@ steps:
     projects: '**/*.csproj'
     arguments: '--configuration $(buildConfiguration)'
 
-# do this after other tasks such as building
+- script: dotnet publish --output $(Build.ArtifactStagingDirectory)
+
 - task: DotNetCoreCLI@2
   displayName: IntegrationTests
   inputs:
     command: test
-    projects: '**/tests/**/*.csproj'
+    projects: '**/tests/**/*UnitTests.csproj'
     arguments: '--configuration $(buildConfiguration)'
 
-- script: dotnet pack /p:PackageVersion=$(version)  # define version variable elsewhere in your pipeline
-- task: NuGetCommand@2
-  displayName: PublishPackage
-  inputs:
-    command: push
-    nuGetFeedType: external
-    publishFeedCredentials: '<Name of the NuGet service connection>'
-    versioningScheme: byEnvVar
-    versionEnvVar: version
+- task: PublishBuildArtifacts@1
 
 
 
