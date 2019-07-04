@@ -30,10 +30,10 @@ steps:
     arguments: '--configuration $(buildConfiguration)'
 
 - task: CopyFiles@2
-  displayName: 'Copy local.settings.json to: $(Build.ArtifactStagingDirectory)'
+  displayName: 'Copy *settings.json to: $(Build.ArtifactStagingDirectory)'
   inputs:
     Contents: |
-     **\local.settings.json
+     **\*settings.json
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
 - task: CopyFiles@2
