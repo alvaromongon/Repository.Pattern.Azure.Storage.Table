@@ -36,6 +36,12 @@ steps:
      **\local.settings.json
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
+- task: CopyFiles@2
+  displayName: 'Copy *runtimeconfig.json to: $(Build.ArtifactStagingDirectory)'
+  inputs:
+    Contents: |
+     **\*runtimeconfig.json
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
 - script: dotnet publish --output $(Build.ArtifactStagingDirectory)
 
