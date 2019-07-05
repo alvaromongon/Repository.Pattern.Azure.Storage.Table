@@ -36,10 +36,11 @@ stages:
         projects: '**/tests/**/*UnitTests.csproj'
         arguments: '--configuration $(buildConfiguration)'
     
-- stage: publish_artifacts
+- stage: create_publish_artifacts
   dependsOn: unit_tests
   jobs:
-  - job: deploy_staging
+  
+  - job: create_artifacts
     pool:
       vmImage: 'ubuntu-latest'
     steps:
@@ -55,6 +56,9 @@ stages:
         Contents: '**/*runtimeconfig.json'
         TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
+  - job: publish_artifacts
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
     - script: dotnet publish --output $(Build.ArtifactStagingDirectory)
-
     - task: PublishBuildArtifacts@1
