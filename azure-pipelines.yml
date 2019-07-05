@@ -22,7 +22,7 @@ stages:
         projects: '**/*.csproj'
         arguments: '--configuration $(buildConfiguration)'
 
-- stage: unit tests
+- stage: unit_tests
   dependsOn: build
   jobs:
   - job: run_tests
@@ -36,8 +36,8 @@ stages:
         projects: '**/tests/**/*UnitTests.csproj'
         arguments: '--configuration $(buildConfiguration)'
     
-- stage: publish artifacts
-  dependsOn: unit tests
+- stage: publish_artifacts
+  dependsOn: unit_tests
   jobs:
   - job: deploy_staging
     pool:
