@@ -1,51 +1,60 @@
-# ASP.NET Core
-# Build and test ASP.NET Core projects targeting .NET Core.
-# Add steps that run tests, create a NuGet package, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+# Built-test-staging-prod pipeline
 
+# Only run against master
 trigger:
 - master
 
-pool:
-  vmImage: 'ubuntu-latest'
+# Don't run against PRs
+pr: none
 
-variables:
-  buildConfiguration: 'Release'
-  
-steps:
-- script: dotnet restore
+stages:
+- stage: build
+  jobs:
+  - job: run_build
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - script: dotnet restore
+    - task: DotNetCoreCLI@2
+      displayName: Build
+      inputs:
+        command: build
+        projects: '**/*.csproj'
+        arguments: '--configuration $(buildConfiguration)'
 
-- task: DotNetCoreCLI@2
-  displayName: Build
-  inputs:
-    command: build
-    projects: '**/*.csproj'
-    arguments: '--configuration $(buildConfiguration)'
+- stage: unit tests
+  dependsOn: build
+  jobs:
+  - job: run_tests
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: DotNetCoreCLI@2
+      displayName: UnitTests
+      inputs:
+        command: test
+        projects: '**/tests/**/*UnitTests.csproj'
+        arguments: '--configuration $(buildConfiguration)'
+    
+- stage: publish artifacts
+  dependsOn: unit tests
+  jobs:
+  - job: deploy_staging
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: CopyFiles@2
+      displayName: 'Copy *settings.json to: $(Build.ArtifactStagingDirectory)'
+      inputs:
+        Contents: '**/*settings.json'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
-- task: DotNetCoreCLI@2
-  displayName: UnitTests
-  inputs:
-    command: test
-    projects: '**/tests/**/*UnitTests.csproj'
-    arguments: '--configuration $(buildConfiguration)'
+    - task: CopyFiles@2
+      displayName: 'Copy *runtimeconfig.json to: $(Build.ArtifactStagingDirectory)'
+      inputs:
+        Contents: '**/*runtimeconfig.json'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
-- task: CopyFiles@2
-  displayName: 'Copy *settings.json to: $(Build.ArtifactStagingDirectory)'
-  inputs:
-    Contents: |
-     **\*settings.json
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    - script: dotnet publish --output $(Build.ArtifactStagingDirectory)
 
-- task: CopyFiles@2
-  displayName: 'Copy *runtimeconfig.json to: $(Build.ArtifactStagingDirectory)'
-  inputs:
-    Contents: |
-     **\*runtimeconfig.json
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
-
-- script: dotnet publish --output $(Build.ArtifactStagingDirectory)
-
-- task: PublishBuildArtifacts@1
-
-
-
+    - task: PublishBuildArtifacts@1
