@@ -46,7 +46,7 @@ stages:
     steps:
     - task: FileTransform@1
       inputs:
-        folderPath: '$(Build.ArtifactStagingDirectory)/$(integrationTestsFolder)/'
+        folderPath: '$(Build.SourcesDirectory)/$(integrationTestsFolder)/'
         fileType: json
         targetFiles: local.settings.json
     - task: VSTest@2
@@ -58,5 +58,5 @@ stages:
           !**\*testhost*.dll
           !**\*UnitTest*.dll
           !**\obj\**'
-        searchFolder: '$(Build.ArtifactStagingDirectory)'
+        searchFolder: '$(Build.SourcesDirectory)'
         otherConsoleOptions: '/platform:x64 /Framework:.NETCoreApp,Version=v2.1 /logger:console;verbosity="normal"'
