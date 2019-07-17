@@ -49,7 +49,7 @@ stages:
 
     - task: FileTransform@1
       inputs:
-        folderPath: '$(Build.ArtifactStagingDirectory)/**/*IntegrationTests*'
+        folderPath: '$(Build.ArtifactStagingDirectory)'
         fileType: json
         targetFiles: local.settings.json
 
