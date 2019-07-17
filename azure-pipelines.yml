@@ -63,6 +63,12 @@ stages:
         Contents: '**/*runtimeconfig.json'
         TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
+    - task: FileTransform@1
+      inputs:
+        folderPath: '$(Build.ArtifactStagingDirectory)'
+        fileType: json
+        targetFiles: local.settings.json
+
 
 - stage: intergration_tests
   dependsOn: copy_to_staging_directory
@@ -71,11 +77,6 @@ stages:
     pool:
       vmImage: 'windows-latest'
     steps:
-    - task: FileTransform@1
-      inputs:
-        folderPath: '$(Build.ArtifactStagingDirectory)'
-        fileType: json
-        targetFiles: local.settings.json
     - task: VSTest@2
       inputs:
         testSelector: 'testAssemblies'
