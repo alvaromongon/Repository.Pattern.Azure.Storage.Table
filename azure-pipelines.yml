@@ -33,7 +33,7 @@ stages:
 - stage: publish_to_staging_directory
   dependsOn: build_and_unitTests
   jobs:
-  - job: copy_configuration_files
+  - job: publish
     pool:
       vmImage: 'ubuntu-latest'
     steps:
@@ -44,14 +44,8 @@ stages:
     - task: CopyFiles@2
       displayName: 'Copy *settings.json to: $(Build.ArtifactStagingDirectory)'
       inputs:
-        Contents: '**/*settings.json'
+        Contents: '**/*IntegrationTests*/*settings.json'
         TargetFolder: '$(Build.ArtifactStagingDirectory)'
-
-    - task: CopyFiles@2
-      displayName: 'Copy *settings.json to: $(Build.ArtifactStagingDirectory)'
-      inputs:
-        Contents: '**/*settings.json'
-        TargetFolder: '$(Build.ArtifactStagingDirectory)'    
 
     - task: FileTransform@1
       inputs:
