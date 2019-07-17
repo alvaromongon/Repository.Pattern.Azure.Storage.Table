@@ -20,23 +20,7 @@ stages:
       inputs:
         command: build
         projects: '**/*.csproj'
-        arguments: '--configuration $(buildConfiguration)'        
-  - job: copy_configuration_files
-    pool:
-      vmImage: 'ubuntu-latest'
-    steps:
-    - task: CopyFiles@2
-      displayName: 'Copy *settings.json to: $(Build.ArtifactStagingDirectory)'
-      inputs:
-        Contents: '**/*settings.json'
-        TargetFolder: '$(Build.ArtifactStagingDirectory)'
-
-    - task: CopyFiles@2
-      displayName: 'Copy *runtimeconfig.json to: $(Build.ArtifactStagingDirectory)'
-      inputs:
-        Contents: '**/*runtimeconfig.json'
-        TargetFolder: '$(Build.ArtifactStagingDirectory)'           
-
+        arguments: '--configuration $(buildConfiguration)'
 
 - stage: unit_tests
   dependsOn: build
@@ -62,13 +46,13 @@ stages:
     steps:
     - task: FileTransform@1
       inputs:
-        folderPath: '$(Build.ArtifactStagingDirectory)'
+        folderPath: '$(Build.ArtifactStagingDirectory)/$(integrationTestsFolder)/'
         fileType: json
         targetFiles: local.settings.json
     - task: VSTest@2
       inputs:
         testSelector: 'testAssemblies'
-        testAssemblyVer2: '**\*test*.dll
+        testAssemblyVer2: '**\*IntegrationTest*.dll
           !**\*TestAdapter.dll
           !**\*TestPlatform*.dll
           !**\*testhost*.dll
