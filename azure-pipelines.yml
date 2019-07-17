@@ -30,7 +30,7 @@ stages:
         projects: '**/tests/**/*UnitTests.csproj'
         arguments: '--configuration $(buildConfiguration)'      
 
-- stage: publish_to_staging_directory
+- stage: integrationTests
   dependsOn: build_and_unitTests
   jobs:
   - job: publish
@@ -43,18 +43,8 @@ stages:
       inputs:
         folderPath: '$(Build.ArtifactStagingDirectory)'
         fileType: json
-        targetFiles: local.settings.json    
-
-    - task: PublishBuildArtifacts@1
-
-
-- stage: intergration_tests
-  dependsOn: publish_to_staging_directory
-  jobs:  
-  - job: run_integration_tests
-    pool:
-      vmImage: 'windows-latest'
-    steps:
+        targetFiles: local.settings.json  
+        
     - task: VSTest@2
       inputs:
         testSelector: 'testAssemblies'
@@ -66,3 +56,5 @@ stages:
           !**\obj\**'
         searchFolder: '$(Build.ArtifactStagingDirectory)'
         otherConsoleOptions: '/platform:x64 /Framework:.NETCoreApp,Version=v2.1 /logger:console;verbosity="normal"'
+
+    - task: PublishBuildArtifacts@1
