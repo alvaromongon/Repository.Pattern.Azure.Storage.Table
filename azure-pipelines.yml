@@ -22,6 +22,7 @@ stages:
         projects: '**/*.csproj'
         arguments: '--configuration $(buildConfiguration)'
 
+
 - stage: unit_tests
   dependsOn: build
   jobs:
