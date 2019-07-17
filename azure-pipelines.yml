@@ -51,7 +51,7 @@ stages:
 
     - task: FileTransform@1
       inputs:
-        folderPath: '$(Build.ArtifactStagingDirectory)/**/*Tests*'
+        folderPath: '$(Build.ArtifactStagingDirectory)/**/*IntegrationTests*'
         fileType: json
         targetFiles: local.settings.json
 
@@ -66,7 +66,7 @@ stages:
     - task: VSTest@2
       inputs:
         testSelector: 'testAssemblies'
-        testAssemblyVer2: '**\*IntegrationTest*.dll
+        testAssemblyVer2: '**\*IntegrationTests*.dll
           !**\*TestAdapter.dll
           !**\*TestPlatform*.dll
           !**\*testhost*.dll
