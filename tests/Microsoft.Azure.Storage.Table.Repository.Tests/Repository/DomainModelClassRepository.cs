@@ -1,8 +1,8 @@
-﻿using Microsoft.Azure.Storage.Table.Repository.Tests.DomainModel;
+﻿using Microsoft.Azure.Storage.Table.Repository.IntegrationTests.DomainModel;
 using Microsoft.WindowsAzure.Storage.Table;
 using Repository.Pattern.Abstractions;
 
-namespace Microsoft.Azure.Storage.Table.Repository.Tests.Repository
+namespace Microsoft.Azure.Storage.Table.Repository.IntegrationTests.Repository
 {
     public class DomainModelClassRepository : AzureTableStorageRepository<DomainModelClass>
     {
