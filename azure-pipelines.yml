@@ -65,7 +65,7 @@ stages:
 
 
 - stage: intergration_tests
-  dependsOn: unit_tests
+  dependsOn: copy_to_staging_directory
   jobs:  
   - job: variables_transformations
     pool:
