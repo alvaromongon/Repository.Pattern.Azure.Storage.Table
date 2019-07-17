@@ -73,7 +73,7 @@ stages:
     steps:
     - task: FileTransform@1
       inputs:
-        folderPath: '$(Build.ArtifactStagingDirectory)/$(integrationTestsFolder)/'
+        folderPath: '$(Build.ArtifactStagingDirectory)'
         fileType: json
         targetFiles: local.settings.json
     - task: VSTest@2
