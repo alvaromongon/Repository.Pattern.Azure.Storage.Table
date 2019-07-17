@@ -8,9 +8,9 @@ trigger:
 pr: none
 
 stages:
-- stage: build
+- stage: build_and_unitTests
   jobs:
-  - job: run_build
+  - job: run_build_and_unitTests
     pool:
       vmImage: 'ubuntu-latest'
     steps:
@@ -21,34 +21,48 @@ stages:
         command: build
         projects: '**/*.csproj'
         arguments: '--configuration $(buildConfiguration)'
-
-- stage: unit_tests
-  dependsOn: build
-  jobs:
-  - job: run_tests
-    pool:
-      vmImage: 'ubuntu-latest'
-    steps:
     - task: DotNetCoreCLI@2
       displayName: UnitTests
       inputs:
         command: test
         projects: '**/tests/**/*UnitTests.csproj'
-        arguments: '--configuration $(buildConfiguration)'     
+        arguments: '--configuration $(buildConfiguration)'
+
+- stage: copy_to_staging_directory
+  dependsOn: build_and_unitTests
+  jobs:
+  - job: copy_build_output
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - checkout: none
+    - script: dotnet publish --output $(Build.ArtifactStagingDirectory)
+    - task: PublishBuildArtifacts@1
+  - job: copy_configuration_files
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - checkout: none
+    - task: CopyFiles@2
+      displayName: 'Copy *settings.json to: $(Build.ArtifactStagingDirectory)'
+      inputs:
+        Contents: '**/*settings.json'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'    
+
+    - task: FileTransform@1
+      inputs:
+        folderPath: '$(Build.ArtifactStagingDirectory)/**/*Tests*'
+        fileType: json
+        targetFiles: local.settings.json
 
 
 - stage: intergration_tests
-  dependsOn: unit_tests
+  dependsOn: copy_to_staging_directory
   jobs:  
   - job: variables_transformations
     pool:
       vmImage: 'windows-latest'
     steps:
-    - task: FileTransform@1
-      inputs:
-        folderPath: '$(Build.ArtifactStagingDirectory)/$(integrationTestsFolder)/'
-        fileType: json
-        targetFiles: local.settings.json
     - task: VSTest@2
       inputs:
         testSelector: 'testAssemblies'
