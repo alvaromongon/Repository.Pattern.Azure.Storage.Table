@@ -55,13 +55,7 @@ stages:
       displayName: 'Copy *settings.json to: $(Build.ArtifactStagingDirectory)'
       inputs:
         Contents: '**/*settings.json'
-        TargetFolder: '$(Build.ArtifactStagingDirectory)'
-
-    - task: CopyFiles@2
-      displayName: 'Copy *runtimeconfig.json to: $(Build.ArtifactStagingDirectory)'
-      inputs:
-        Contents: '**/*runtimeconfig.json'
-        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'    
 
     - task: FileTransform@1
       inputs:
