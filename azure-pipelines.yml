@@ -36,10 +36,11 @@ stages:
         projects: '**/tests/**/*UnitTests.csproj'
         arguments: '--configuration $(buildConfiguration)'
 
-- stage: artifacts
+- stage: intergration_tests
   dependsOn: unit_tests
   jobs:  
-  - job: publish_artifacts
+
+  - job: copy_configuration_files
     pool:
       vmImage: 'ubuntu-latest'
     steps:
@@ -57,9 +58,6 @@ stages:
         Contents: '**/*runtimeconfig.json'
         TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
-- stage: intergration_tests
-  dependsOn: artifacts
-  jobs:  
   - job: variables_transformations
     pool:
       vmImage: 'windows-latest'
