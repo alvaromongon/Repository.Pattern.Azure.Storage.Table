@@ -39,7 +39,14 @@ stages:
 - stage: artifacts
   dependsOn: unit_tests
   jobs:  
-  - job: create_artifacts
+  - job: publish_build_artifacts
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - script: dotnet publish --output $(Build.ArtifactStagingDirectory)
+    - task: PublishBuildArtifacts@1
+
+  - job: copy_config_files
     pool:
       vmImage: 'ubuntu-latest'
     steps:
@@ -54,13 +61,6 @@ stages:
       inputs:
         Contents: '**/*runtimeconfig.json'
         TargetFolder: '$(Build.ArtifactStagingDirectory)'
-
-  - job: publish_artifacts
-    pool:
-      vmImage: 'ubuntu-latest'
-    steps:
-    - script: dotnet publish --output $(Build.ArtifactStagingDirectory)
-    - task: PublishBuildArtifacts@1
 
 - stage: intergration_tests
   dependsOn: artifacts
