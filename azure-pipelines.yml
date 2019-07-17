@@ -55,7 +55,6 @@ stages:
     pool:
       vmImage: 'windows-latest'
     steps:
-    - checkout: none    
     - task: VSTest@2
       inputs:
         testSelector: 'testAssemblies'
