@@ -12,7 +12,7 @@ stages:
   jobs:
   - job: run_build_and_unitTests
     pool:
-      vmImage: 'ubuntu-latest'
+      vmImage: 'windows-latest'
     steps:
     - script: dotnet restore
     
@@ -35,7 +35,7 @@ stages:
   jobs:
   - job: publish
     pool:
-      vmImage: 'ubuntu-latest'
+      vmImage: 'windows-latest'
     steps:
     - script: dotnet publish --output $(Build.ArtifactStagingDirectory)
 
