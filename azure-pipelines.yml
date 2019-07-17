@@ -36,20 +36,15 @@ stages:
   - job: publish
     pool:
       vmImage: 'ubuntu-latest'
-    steps:    
-    - task: CopyFiles@2
-      displayName: 'Copy *settings.json to: $(Build.ArtifactStagingDirectory)'
-      inputs:
-        Contents: '**/*IntegrationTests*/*settings.json'
-        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    steps:
+    - script: dotnet publish --output $(Build.ArtifactStagingDirectory)
 
     - task: FileTransform@1
       inputs:
-        folderPath: '$(Build.ArtifactStagingDirectory)/**/*IntegrationTests*'
+        folderPath: '$(Build.ArtifactStagingDirectory)'
         fileType: json
-        targetFiles: local.settings.json
+        targetFiles: local.settings.json    
 
-    - script: dotnet publish --output $(Build.ArtifactStagingDirectory)    
     - task: PublishBuildArtifacts@1
 
 
@@ -64,7 +59,7 @@ stages:
     - task: VSTest@2
       inputs:
         testSelector: 'testAssemblies'
-        testAssemblyVer2: '**\*IntegrationTests*.dll
+        testAssemblyVer2: '**\*IntegrationTests.dll
           !**\*TestAdapter.dll
           !**\*TestPlatform*.dll
           !**\*testhost*.dll
