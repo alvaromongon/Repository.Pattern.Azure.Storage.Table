@@ -20,7 +20,23 @@ stages:
       inputs:
         command: build
         projects: '**/*.csproj'
-        arguments: '--configuration $(buildConfiguration)'
+        arguments: '--configuration $(buildConfiguration)'        
+  - job: copy_configuration_files
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: CopyFiles@2
+      displayName: 'Copy *settings.json to: $(Build.ArtifactStagingDirectory)'
+      inputs:
+        Contents: '**/*settings.json'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+    - task: CopyFiles@2
+      displayName: 'Copy *runtimeconfig.json to: $(Build.ArtifactStagingDirectory)'
+      inputs:
+        Contents: '**/*runtimeconfig.json'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'           
+
 
 - stage: unit_tests
   dependsOn: build
@@ -34,30 +50,12 @@ stages:
       inputs:
         command: test
         projects: '**/tests/**/*UnitTests.csproj'
-        arguments: '--configuration $(buildConfiguration)'
+        arguments: '--configuration $(buildConfiguration)'     
+
 
 - stage: intergration_tests
   dependsOn: unit_tests
   jobs:  
-
-  - job: copy_configuration_files
-    pool:
-      vmImage: 'ubuntu-latest'
-    steps:
-    - script: dotnet publish --output $(Build.ArtifactStagingDirectory)
-    - task: PublishBuildArtifacts@1
-    - task: CopyFiles@2
-      displayName: 'Copy *settings.json to: $(Build.ArtifactStagingDirectory)'
-      inputs:
-        Contents: '**/*settings.json'
-        TargetFolder: '$(Build.ArtifactStagingDirectory)'
-
-    - task: CopyFiles@2
-      displayName: 'Copy *runtimeconfig.json to: $(Build.ArtifactStagingDirectory)'
-      inputs:
-        Contents: '**/*runtimeconfig.json'
-        TargetFolder: '$(Build.ArtifactStagingDirectory)'
-
   - job: variables_transformations
     pool:
       vmImage: 'windows-latest'
