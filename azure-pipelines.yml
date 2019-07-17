@@ -35,7 +35,33 @@ stages:
       inputs:
         command: test
         projects: '**/tests/**/*UnitTests.csproj'
-        arguments: '--configuration $(buildConfiguration)'     
+        arguments: '--configuration $(buildConfiguration)'
+
+
+- stage: copy_to_staging_directory
+  dependsOn: unit_tests
+  jobs:
+  - job: copy_build_output
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - script: dotnet publish --output $(Build.ArtifactStagingDirectory)
+    - task: PublishBuildArtifacts@1
+  - job: copy_configuration_files
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: CopyFiles@2
+      displayName: 'Copy *settings.json to: $(Build.ArtifactStagingDirectory)'
+      inputs:
+        Contents: '**/*settings.json'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+    - task: CopyFiles@2
+      displayName: 'Copy *runtimeconfig.json to: $(Build.ArtifactStagingDirectory)'
+      inputs:
+        Contents: '**/*runtimeconfig.json'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
 
 - stage: intergration_tests
@@ -47,7 +73,7 @@ stages:
     steps:
     - task: FileTransform@1
       inputs:
-        folderPath: '$(Build.SourcesDirectory)/$(integrationTestsFolder)/'
+        folderPath: '$(Build.ArtifactStagingDirectory)/$(integrationTestsFolder)/'
         fileType: json
         targetFiles: local.settings.json
     - task: VSTest@2
@@ -59,5 +85,5 @@ stages:
           !**\*testhost*.dll
           !**\*UnitTest*.dll
           !**\obj\**'
-        searchFolder: '$(Build.SourcesDirectory)'
+        searchFolder: '$(Build.ArtifactStagingDirectory)'
         otherConsoleOptions: '/platform:x64 /Framework:.NETCoreApp,Version=v2.1 /logger:console;verbosity="normal"'
