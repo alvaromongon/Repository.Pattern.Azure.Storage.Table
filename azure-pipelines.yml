@@ -48,8 +48,8 @@ stages:
     - task: VSTest@2
       inputs:
         testSelector: 'testAssemblies'
-        testAssemblyVer2: '**\Microsoft.Azure.Storage.Table.Repository.IntegrationTests.dll'
+        testAssemblyVer2: '.\*IntegrationTests.dll'
         searchFolder: '$(Build.ArtifactStagingDirectory)'
         otherConsoleOptions: '/platform:x64 /Framework:.NETCoreApp,Version=v2.1 /logger:console;verbosity="normal"'
 
-    - task: PublishBuildArtifacts@1
+#    - task: PublishBuildArtifacts@1
