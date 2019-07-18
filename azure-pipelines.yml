@@ -44,7 +44,7 @@ stages:
         targetFiles: local.settings.json  
         
     - task: VSTest@2
-      condition: eq($(RunIntegrationTests), true)
+      condition: eq(variables['RunIntegrationTests'], true)
       inputs:
         testSelector: 'testAssemblies'
         testAssemblyVer2: '**\*.IntegrationTests.dll'
@@ -52,14 +52,14 @@ stages:
         otherConsoleOptions: '/platform:x64 /Framework:.NETCoreApp,Version=v2.1 /logger:console;verbosity="normal"'
 
     - task: NuGetCommand@2
-      condition: eq($(PushPackage), true)
+      condition: eq(variables['PushPackage'], true)
       inputs:
         command: 'pack'
         packagesToPack: '**/Microsoft.Azure.Storage.Table.Repository.nuspec'
         versioningScheme: 'byBuildNumber'
 
     - task: NuGetCommand@2
-      condition: eq($(PushPackage), true)
+      condition: eq(variables['PushPackage'], true)
       inputs:
         command: 'push'
         packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
