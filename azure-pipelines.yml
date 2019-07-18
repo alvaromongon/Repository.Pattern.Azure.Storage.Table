@@ -52,11 +52,18 @@ stages:
         otherConsoleOptions: '/platform:x64 /Framework:.NETCoreApp,Version=v2.1 /logger:console;verbosity="normal"'
 
     - task: NuGetCommand@2
+      condition: $(PushPackage)    
+      inputs:
+        command: 'pack'
+        packagesToPack: '**/Microsoft.Azure.Storage.Table.Repository.nuspec'
+        versioningScheme: 'off'
+
+    - task: NuGetCommand@2
       condition: $(PushPackage)
       inputs:
         command: 'push'
         packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
-        nuGetFeedType: 'external'
-        publishFeedCredentials: 'Nuget official' 
+        nuGetFeedType: 'internal'
+        publishVstsFeed: '02744400-58ba-47b7-9683-250b0ee8be39'
 
 #    - task: PublishBuildArtifacts@1
