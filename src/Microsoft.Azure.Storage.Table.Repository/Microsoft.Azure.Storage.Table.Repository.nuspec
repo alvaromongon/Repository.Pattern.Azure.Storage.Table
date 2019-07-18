@@ -3,7 +3,7 @@
   <!--https://docs.microsoft.com/en-us/nuget/reference/nuspec-->
   <metadata>
     <id>Microsoft.Azure.Storage.Table.Repository</id>
-    <version>0.1.0</version>
+    <version$version$</version>
     <authors>Alvaro Montero Gonzalez</authors>
     <owners>Alvaro Montero Gonzalez</owners>
     <licenseUrl>https://github.com/alvaromongon/Microsoft.Azure.Storage.Table.Repository/blob/master/LICENSE</licenseUrl>
