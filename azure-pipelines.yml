@@ -52,15 +52,13 @@ stages:
         searchFolder: '$(Build.ArtifactStagingDirectory)'
         otherConsoleOptions: '/platform:x64 /Framework:.NETCoreApp,Version=v2.1 /logger:console;verbosity="normal"'
 
-#    - task: NuGetCommand@2
-#      displayName: 'nuget push'
-#      inputs:
-#        command: 'push'
-#        feedsToUse: 'select'
-#        packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
-#        nuGetFeedType: 'internal'
-#        publishVstsFeed: 'TestFeed'
-#        versioningScheme: 'off'
-#        allowPackageConflicts: true
+    - task: NuGetCommand@2
+      displayName: 'nuget push'
+      inputs:
+        command: 'push'
+        packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+        versioningScheme: 'off'
+        nuGetFeedType: 'external'
+        publishFeedCredentials: '*******'        
 
-    - task: PublishBuildArtifacts@1
+#    - task: PublishBuildArtifacts@1
