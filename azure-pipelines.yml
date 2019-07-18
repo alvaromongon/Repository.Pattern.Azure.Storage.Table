@@ -30,7 +30,7 @@ stages:
         projects: '**/tests/**/*UnitTests.csproj'
         arguments: '--configuration $(buildConfiguration)'      
 
-- stage: integrationTests
+- stage: integrationTests_and_nugetpush
   dependsOn: build_and_unitTests
   jobs:
   - job: publish
@@ -52,4 +52,15 @@ stages:
         searchFolder: '$(Build.ArtifactStagingDirectory)'
         otherConsoleOptions: '/platform:x64 /Framework:.NETCoreApp,Version=v2.1 /logger:console;verbosity="normal"'
 
-#    - task: PublishBuildArtifacts@1
+#    - task: NuGetCommand@2
+#      displayName: 'nuget push'
+#      inputs:
+#        command: 'push'
+#        feedsToUse: 'select'
+#        packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+#        nuGetFeedType: 'internal'
+#        publishVstsFeed: 'TestFeed'
+#        versioningScheme: 'off'
+#        allowPackageConflicts: true
+
+    - task: PublishBuildArtifacts@1
