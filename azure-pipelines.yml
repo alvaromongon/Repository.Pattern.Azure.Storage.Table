@@ -1,5 +1,3 @@
-# Built-test-staging-prod pipeline
-
 # Only run against master
 trigger:
 - master
@@ -53,12 +51,10 @@ stages:
         otherConsoleOptions: '/platform:x64 /Framework:.NETCoreApp,Version=v2.1 /logger:console;verbosity="normal"'
 
     - task: NuGetCommand@2
-      displayName: 'nuget push'
       inputs:
         command: 'push'
         packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
-        versioningScheme: 'off'
         nuGetFeedType: 'external'
-        publishFeedCredentials: '*******'        
+        publishFeedCredentials: 'Nuget official' 
 
 #    - task: PublishBuildArtifacts@1
