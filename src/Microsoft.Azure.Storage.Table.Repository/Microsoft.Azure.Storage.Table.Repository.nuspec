@@ -20,7 +20,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="src\Microsoft.Azure.Storage.Table.Repository\bin\Release\netstandard2.0\Microsoft.Azure.Storage.Table.Repository.dll" target="lib\netstandard2.0\Microsoft.Azure.Storage.Table.Repository.dll" />    
-    <file src="src\Microsoft.Azure.Storage.Table.Repository\bin\Release\netstandard2.0\Repository.Pattern.Abstractions.dll" target="lib\netstandard2.0\Repository.Pattern.Abstractions.dll" />    
+    <file src="Microsoft.Azure.Storage.Table.Repository.dll" target="lib\netstandard2.0\Microsoft.Azure.Storage.Table.Repository.dll" />    
+    <file src="Repository.Pattern.Abstractions.dll" target="lib\netstandard2.0\Repository.Pattern.Abstractions.dll" />    
   </files>
 </package>
