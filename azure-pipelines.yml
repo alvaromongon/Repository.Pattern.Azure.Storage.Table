@@ -44,6 +44,7 @@ stages:
         targetFiles: local.settings.json  
         
     - task: VSTest@2
+      condition: $(RunIntegrationTests)
       inputs:
         testSelector: 'testAssemblies'
         testAssemblyVer2: '**\*.IntegrationTests.dll'
@@ -51,6 +52,7 @@ stages:
         otherConsoleOptions: '/platform:x64 /Framework:.NETCoreApp,Version=v2.1 /logger:console;verbosity="normal"'
 
     - task: NuGetCommand@2
+      condition: $(PushPackage)
       inputs:
         command: 'push'
         packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
