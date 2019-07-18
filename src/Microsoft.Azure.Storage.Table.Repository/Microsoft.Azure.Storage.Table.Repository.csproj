@@ -20,4 +20,10 @@
     <ProjectReference Include="..\Repository.Pattern.Abstractions\Repository.Pattern.Abstractions.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Microsoft.Azure.Storage.Table.Repository.nuspec">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
