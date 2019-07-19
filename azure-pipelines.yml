@@ -1,12 +1,6 @@
+# https://stackoverflow.com/questions/54718866/azure-pipeline-nuget-package-versioning-scheme-how-to-get-1-0-revr
 #Set build number automatically
-name: $(majorMinorVersion).$(semanticVersion) # $(rev:r) # NOTE: rev resets when the default retention period expires
-
-# pipeline variables
-variables:
-  majorMinorVersion: 1.0
-  # semanticVersion counter is automatically incremented by one in each execution of pipeline
-  # second parameter is seed value to reset to every time the referenced majorMinorVersion is changed
-  semanticVersion: $[counter(variables['majorMinorVersion'], 0)]
+name: 1.0.$(rev:.r)
 
 # Only run against master
 trigger:
