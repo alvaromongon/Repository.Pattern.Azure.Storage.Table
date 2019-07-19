@@ -59,7 +59,7 @@ stages:
       condition: eq(variables['PushPackage'], true)
       inputs:
         command: 'pack'
-        packagesToPack: '**/Microsoft.Azure.Storage.Table.Repository.nuspec'
+        packagesToPack: '**/Microsoft.Azure.Storage.Table.Repository.csproj'
         versioningScheme: byBuildNumber # https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/build/dotnet-core-cli?view=azure-devops#yaml-snippet
 
     - task: NuGetCommand@2
