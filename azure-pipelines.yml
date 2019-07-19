@@ -49,6 +49,7 @@ stages:
     - script: dotnet publish --output $(Build.ArtifactStagingDirectory)
 
     - task: FileTransform@1
+      displayName: 'local.settings.json variables set'    
       inputs:
         folderPath: '$(Build.ArtifactStagingDirectory)'
         fileType: json
@@ -62,19 +63,23 @@ stages:
         searchFolder: '$(Build.ArtifactStagingDirectory)'
         otherConsoleOptions: '/platform:x64 /Framework:.NETCoreApp,Version=v2.1 /logger:console;verbosity="normal"'
 
-    - task: NuGetCommand@2
+    - task: DotNetCoreCLI@2
+      displayName: 'NuGet pack'
       condition: eq(variables['PushPackage'], true)
       inputs:
         command: 'pack'
+        configuration: $(BuildConfiguration)
         packagesToPack: '**/Microsoft.Azure.Storage.Table.Repository.csproj'
+        packDirectory: '$(build.artifactStagingDirectory)'
         versioningScheme: byBuildNumber # https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/build/dotnet-core-cli?view=azure-devops#yaml-snippet
 
-    - task: NuGetCommand@2
+    - task: DotNetCoreCLI@2
+      displayName: 'NuGet push'    
       condition: eq(variables['PushPackage'], true)
       inputs:
         command: 'push'
-        packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
         nuGetFeedType: 'internal'
+        packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
         publishVstsFeed: '02744400-58ba-47b7-9683-250b0ee8be39'
 
 #    - task: PublishBuildArtifacts@1
