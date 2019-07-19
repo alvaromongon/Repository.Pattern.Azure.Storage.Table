@@ -1,14 +1,17 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Alvaro Montero Gonzalez</Authors>
-    <RepositoryUrl>https://github.com/alvaromongon/Microsoft.Azure.Storage.Table.Repository/</RepositoryUrl>
-    <PackageProjectUrl>https://github.com/alvaromongon/Microsoft.Azure.Storage.Table.Repository/</PackageProjectUrl>
-    <PackageLicenseExpression></PackageLicenseExpression>
-    <Description>Repository pattern implementation for microsoft azure storage table. It is probably not the fastest one but maybe one of the most simple. The tradeof is the use of dynamic in order to map from model objects. to table entites.</Description>
-    <PackageTags>netstandard tablestorage repository-pattern azure-table-storage azure-storage</PackageTags>
-    <Version>0.1.0</Version>
+    <owners>Alvaro Montero Gonzalez</owners>
+    <licenseUrl>https://github.com/alvaromongon/Microsoft.Azure.Storage.Table.Repository/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/alvaromongon/Microsoft.Azure.Storage.Table.Repository</projectUrl>
+    <iconUrl>https://www.nuget.org/Content/gallery/img/default-package-icon.svg</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Repository pattern implementation for microsoft azure storage table. It is probably not the fastest one but maybe one of the most simple. The tradeof is the use of dynamic in order to map from model objects. to table entites.</description>
+    <releaseNotes>First Release.</releaseNotes>
+    <copyright>Copyright 2019</copyright>
+    <tags>netstandard tablestorage repository-pattern azure-table-storage azure-storage</tags>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,12 +21,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Repository.Pattern.Abstractions\Repository.Pattern.Abstractions.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="Microsoft.Azure.Storage.Table.Repository.nuspec">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>
