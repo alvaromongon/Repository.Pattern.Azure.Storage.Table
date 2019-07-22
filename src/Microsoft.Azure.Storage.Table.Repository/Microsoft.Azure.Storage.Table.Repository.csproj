@@ -16,11 +16,8 @@
 
   <ItemGroup>
     <PackageReference Include="FastMember" Version="1.4.1" />
+    <PackageReference Include="Repository.Pattern.Abstractions" Version="1.0.8" />
     <PackageReference Include="WindowsAzure.Storage" Version="9.3.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Repository.Pattern.Abstractions\Repository.Pattern.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>
