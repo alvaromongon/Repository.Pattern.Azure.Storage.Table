@@ -1,18 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+  <!-- https://docs.microsoft.com/en-us/dotnet/core/tools/csproj#nuget-metadata-properties -->
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>amg.Microsoft.Azure.Storage.Table.Repository</PackageId>
+    <Title>Microsoft.Azure.Storage.Table.Repository</Title>
     <Authors>Alvaro Montero Gonzalez</Authors>
-    <owners>Alvaro Montero Gonzalez</owners>
-    <licenseUrl>https://github.com/alvaromongon/Microsoft.Azure.Storage.Table.Repository/blob/master/LICENSE</licenseUrl>
-    <projectUrl>https://github.com/alvaromongon/Microsoft.Azure.Storage.Table.Repository</projectUrl>
-    <iconUrl>https://www.nuget.org/Content/gallery/img/default-package-icon.svg</iconUrl>
+    <owners>Alvaro Montero Gonzalez</owners>    
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Repository pattern implementation for microsoft azure storage table. It is probably not the fastest one but maybe one of the most simple. The tradeof is the use of dynamic in order to map from model objects. to table entites.</description>
-    <releaseNotes>First Release.</releaseNotes>
-    <copyright>Copyright 2019</copyright>
-    <tags>netstandard tablestorage repository-pattern azure-table-storage azure-storage</tags>
-  </PropertyGroup>
+    <Description>Repository pattern implementation for microsoft azure storage table. It is probably not the fastest one but maybe one of the most simple. The tradeof is the use of dynamic in order to map from model objects. to table entites.</Description>    
+    <Copyright>Copyright 2019</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIconUrl>https://www.nuget.org/Content/gallery/img/default-package-icon.svg</PackageIconUrl>
+    <PackageReleaseNotes>First Release.</PackageReleaseNotes>
+    <RepositoryUrl>https://github.com/alvaromongon/Microsoft.Azure.Storage.Table.Repository</RepositoryUrl>
+
+    <PackageTags>netstandard;tablestorage;repository-pattern;azure-table-storage;azure-storage</PackageTags>  
+
+</PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="FastMember" Version="1.4.1" />
@@ -21,3 +26,4 @@
   </ItemGroup>
 
 </Project>
+
