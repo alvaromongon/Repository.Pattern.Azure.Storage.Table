@@ -3,6 +3,7 @@
   <!-- https://docs.microsoft.com/en-us/dotnet/core/tools/csproj#nuget-metadata-properties -->
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+      
     <PackageId>amg.Microsoft.Azure.Storage.Table.Repository</PackageId>
     <Title>Microsoft.Azure.Storage.Table.Repository</Title>
     <Authors>Alvaro Montero Gonzalez</Authors>
@@ -20,8 +21,8 @@
 </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FastMember" Version="1.4.1" />
-    <PackageReference Include="Repository.Pattern.Abstractions" Version="1.0.8" />
+    <PackageReference Include="FastMember" Version="1.5.0" />
+    <PackageReference Include="Repository.Pattern.Abstractions" Version="1.0.10" />
     <PackageReference Include="WindowsAzure.Storage" Version="9.3.3" />
   </ItemGroup>
 
