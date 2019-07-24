@@ -10,8 +10,7 @@ variables:
   semanticVersion: $[counter(variables['majorMinorVersion'], 0)]
 
 # Only run against master
-trigger:
-- master
+trigger: none
 
 # Don't run against PRs
 pr: none
