@@ -4,8 +4,8 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
       
-    <PackageId>amg.Microsoft.Azure.Storage.Table.Repository</PackageId>
-    <Title>Microsoft.Azure.Storage.Table.Repository</Title>
+    <PackageId>amg.Azure.Storage.Table.Repository</PackageId>
+    <Title>amg.Azure.Storage.Table.Repository</Title>
     <Authors>Alvaro Montero Gonzalez</Authors>
     <owners>Alvaro Montero Gonzalez</owners>    
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
