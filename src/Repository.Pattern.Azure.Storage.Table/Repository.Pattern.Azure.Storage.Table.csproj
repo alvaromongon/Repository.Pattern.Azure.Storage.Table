@@ -4,8 +4,8 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
       
-    <PackageId>amg.Azure.Storage.Table.Repository</PackageId>
-    <Title>amg.Azure.Storage.Table.Repository</Title>
+    <PackageId>amg.Repository.Pattern.Azure.Storage.Table</PackageId>
+    <Title>amg.Repository.Pattern.Azure.Storage.Table</Title>
     <Authors>Alvaro Montero Gonzalez</Authors>
     <owners>Alvaro Montero Gonzalez</owners>    
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -21,8 +21,8 @@
 </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="amg.Repository.Pattern.Abstractions" Version="1.0.12" />
     <PackageReference Include="FastMember" Version="1.5.0" />
-    <PackageReference Include="Repository.Pattern.Abstractions" Version="1.0.10" />
     <PackageReference Include="WindowsAzure.Storage" Version="9.3.3" />
   </ItemGroup>
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace Microsoft.Azure.Storage.Table.Repository.IntegrationTests.DomainModel
+namespace Repository.Pattern.Azure.Storage.Table.IntegrationTests.DomainModel
 {
     public class DomainModelClass
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Microsoft.Azure.Storage.Table.Repository.Exceptions
+namespace Repository.Pattern.Azure.Storage.Table.Exceptions
 {
     public class AlreadyExistException : Exception
     {

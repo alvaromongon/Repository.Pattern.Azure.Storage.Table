@@ -1,5 +1,5 @@
-﻿using Microsoft.Azure.Storage.Table.Repository.Exceptions;
-using Microsoft.Azure.Storage.Table.Repository.TableEntities;
+﻿using Repository.Pattern.Azure.Storage.Table.Exceptions;
+using Repository.Pattern.Azure.Storage.Table.TableEntities;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Shared.Protocol;
 using Microsoft.WindowsAzure.Storage.Table;
@@ -11,7 +11,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace Microsoft.Azure.Storage.Table.Repository
+namespace Repository.Pattern.Azure.Storage.Table
 {
     /// <summary>
     /// Using last implementation of Azure table storage in WindowsAzure.Storage 9.3.3

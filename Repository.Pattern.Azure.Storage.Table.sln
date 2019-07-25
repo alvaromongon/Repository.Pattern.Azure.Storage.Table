@@ -14,9 +14,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{AAC8DCA4-993
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{BF0AF0FD-26B9-4438-98A8-998F3021B94F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Azure.Storage.Table.Repository", "src\Microsoft.Azure.Storage.Table.Repository\Microsoft.Azure.Storage.Table.Repository.csproj", "{F6920CCE-BEA4-4D8D-BE19-C1D7291F52C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository.Pattern.Azure.Storage.Table", "src\Repository.Pattern.Azure.Storage.Table\Repository.Pattern.Azure.Storage.Table.csproj", "{F6920CCE-BEA4-4D8D-BE19-C1D7291F52C8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Azure.Storage.Table.Repository.IntegrationTests", "tests\Microsoft.Azure.Storage.Table.Repository.IntegrationTests\Microsoft.Azure.Storage.Table.Repository.IntegrationTests.csproj", "{B375B40B-CE1C-4AC4-B8D2-E10266157983}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository.Pattern.Azure.Storage.Table.IntegrationTests", "tests\Repository.Pattern.Azure.Storage.Table.IntegrationTests\Repository.Pattern.Azure.Storage.Table.IntegrationTests.csproj", "{B375B40B-CE1C-4AC4-B8D2-E10266157983}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

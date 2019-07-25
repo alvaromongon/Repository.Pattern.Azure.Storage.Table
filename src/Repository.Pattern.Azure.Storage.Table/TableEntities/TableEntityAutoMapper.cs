@@ -3,7 +3,7 @@ using Microsoft.WindowsAzure.Storage.Table;
 using System;
 using System.Collections.Generic;
 
-namespace Microsoft.Azure.Storage.Table.Repository.TableEntities
+namespace Repository.Pattern.Azure.Storage.Table.TableEntities
 {
     internal class TableEntityAutoMapper<T> where T : class, new()
     {

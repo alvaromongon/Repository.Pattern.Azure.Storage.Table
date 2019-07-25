@@ -1,8 +1,8 @@
 ﻿using FluentAssertions;
-using Microsoft.Azure.Storage.Table.Repository.Exceptions;
-using Microsoft.Azure.Storage.Table.Repository.IntegrationTests.Configuration;
-using Microsoft.Azure.Storage.Table.Repository.IntegrationTests.DomainModel;
-using Microsoft.Azure.Storage.Table.Repository.IntegrationTests.Repository;
+using Repository.Pattern.Azure.Storage.Table.Exceptions;
+using Repository.Pattern.Azure.Storage.Table.IntegrationTests.Configuration;
+using Repository.Pattern.Azure.Storage.Table.IntegrationTests.DomainModel;
+using Repository.Pattern.Azure.Storage.Table.IntegrationTests.Repository;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.WindowsAzure.Storage;
@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Microsoft.Azure.Storage.Table.Repository.IntegrationTests
+namespace Repository.Pattern.Azure.Storage.Table.IntegrationTests
 {
     [TestClass]
     public class RepositoryTests
