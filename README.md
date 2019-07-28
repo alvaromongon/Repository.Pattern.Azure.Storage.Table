@@ -1,4 +1,4 @@
-[![ease_maker MyGet Build Status](https://www.myget.org/BuildSource/Badge/ease_maker?identifier=006b227d-9186-4a06-9023-ebd3070fd3ad)](https://www.myget.org/)
+[![Build Status](https://dev.azure.com/wtwd/Ease%20Maker/_apis/build/status/Repository.Pattern.Azure.Storage.Table?branchName=master)](https://dev.azure.com/wtwd/Ease%20Maker/_build/latest?definitionId=3&branchName=master)
 
 # Introduction 
 Repository pattern implementation for microsoft azure storage table.
