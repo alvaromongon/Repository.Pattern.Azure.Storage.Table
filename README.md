@@ -16,7 +16,7 @@ This implementation is based on the las version of WindowsAzure.Storage (9.3.3)
 The next versions of azure storage client libraries include the table support under cosmosDb and does not currently support net standard.
 
 # Getting Started
-Just get it and build it. I was using VS 2017 Enterprise.
+Just get it and build it. I was using VS 2019
 
 The idea is to have a separate IRepository for each domain object. 
 The domain object will know nothing about the storage layer and the effort to build the storage layer is minimum.
