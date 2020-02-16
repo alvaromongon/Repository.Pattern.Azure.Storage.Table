@@ -23,7 +23,7 @@ The domain object will know nothing about the storage layer and the effort to bu
 
 The tradeof of being so easy to use is the speed and the supported types, that we will try to improve with the time.
 For the first version only the Azure Storage Table types are supported:
-[https://docs.microsoft.com/en-us/rest/api/storageservices/understanding-the-table-service-data-model](Understanding the Table Service Data Model)
+[Understanding the Table Service Data Model](https://docs.microsoft.com/en-us/rest/api/storageservices/understanding-the-table-service-data-model)
 
 
 # Build and Test
