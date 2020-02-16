@@ -6,10 +6,10 @@ It is probably not the fastest one but maybe one of the most simple.
 The tradeof is the use of dynamic in order to map from model objects. to table entites.
 
 This implementation is base on: 
-[https://github.com/Crokus/azure-table-storage-repo](Crokus azure table storage repository)
+[Crokus azure table storage repository](https://github.com/Crokus/azure-table-storage-repo)
 
 This implementation is leverating:
-[https://github.com/mgravell/fast-member](Mgravell Fast member library)
+[Mgravell Fast member library](https://github.com/mgravell/fast-member)
 
 ## IMPORTANT: 
 This implementation is based on the las version of WindowsAzure.Storage (9.3.3) 
